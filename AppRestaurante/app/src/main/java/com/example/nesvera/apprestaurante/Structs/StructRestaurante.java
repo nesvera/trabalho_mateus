@@ -8,18 +8,18 @@ import java.util.List;
 
 public class StructRestaurante {
 
-    private String cardapio;
+    private List<StructCategoria> cardapio;
     private String pedidos;
     private StructDados dados;
 
     public StructRestaurante() {
     }
 
-    public String getCardapio() {
+    public List<StructCategoria> getCardapio() {
         return cardapio;
     }
 
-    public void setCardapio(String cardapio) {
+    public void setCardapio(List<StructCategoria> cardapio) {
         this.cardapio = cardapio;
     }
 

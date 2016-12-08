@@ -2,6 +2,9 @@ package com.example.nesvera.apprestaurante.Firebase;
 
 import android.util.Log;
 
+import com.example.nesvera.apprestaurante.InitActivity;
+import com.example.nesvera.apprestaurante.Structs.StructCategoria;
+import com.example.nesvera.apprestaurante.Structs.StructDados;
 import com.example.nesvera.apprestaurante.Structs.StructRestaurante;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -21,6 +24,7 @@ import static android.content.ContentValues.TAG;
 public class DatabaseAccess {
 
     private static FirebaseDatabase firebaseDatabase;
+    private DatabaseReference teste;
 
     public static DatabaseReference restauranteRef;
     private List<DadosCategoria> cardapioRef;
@@ -28,7 +32,8 @@ public class DatabaseAccess {
     private List<DadosCategoria> categoriaList;
     private List<String> categoriaListStr;
 
-    private List<String> restaranteList;
+    public static List<String> restaranteList;
+    public static boolean restauranteListOk;
 
     public DatabaseAccess(FirebaseDatabase db) {
         firebaseDatabase = db;
@@ -41,6 +46,7 @@ public class DatabaseAccess {
 
     public void addRestaurante( String restaurante ){
         DatabaseReference teste = firebaseDatabase.getReference(restaurante);
+
         teste.setValue(restaurante);
     }
 
@@ -61,6 +67,8 @@ public class DatabaseAccess {
 
         categoriaListStr = null;
         categoriaListStr = new ArrayList<String>();
+
+        restauranteListOk = false;
 
         // Seta a referencia dentro da "pasta" Cardapio
         final DatabaseReference cardapio = restauranteRef.child("Cardapio/");
@@ -84,6 +92,8 @@ public class DatabaseAccess {
                         System.out.println("Algo aconteceu");
                     }
                 }
+
+                restauranteListOk = true;
             }
 
             @Override
@@ -139,16 +149,24 @@ public class DatabaseAccess {
         return categoriaListStr;
     }
 
+    public void addRestaurante( String nome, String descricao, String endereco ){
+        StructRestaurante newRestaurante = new StructRestaurante();
+        StructDados newDadosRestaurante = new StructDados();
+
+        newDadosRestaurante.setNome(nome);
+        newDadosRestaurante.setDescricao(descricao);
+        newDadosRestaurante.setEndereco(endereco);
+
+        newRestaurante.setDados(newDadosRestaurante);
+
+        DatabaseReference dir = firebaseDatabase.getReference(newRestaurante.getDados().getNome());
+        dir.setValue(newRestaurante);
+
+    }
+
     public List<String> getRestauranteList(){
-
-        // Limpa as listas auxiliares globais
-        categoriaList = null;
-        categoriaList = new ArrayList<DadosCategoria>();
-
-        categoriaListStr = null;
-        categoriaListStr = new ArrayList<String>();
-
         restaranteList.clear();
+        restaranteList = new ArrayList<String>();
 
         // Seta a referencia dentro da "pasta" Cardapio
         final DatabaseReference cardapio = firebaseDatabase.getReference();
@@ -166,7 +184,7 @@ public class DatabaseAccess {
                     if (temp != null) {
                         handlLeituraRestaurante(temp);
 
-                        System.out.println("############# " + temp.getDados().getNome());
+                        //System.out.println("############# " + temp.getDados().getNome());
 
                     } else {
                         System.out.println("Algo aconteceu");
@@ -179,8 +197,12 @@ public class DatabaseAccess {
                 // Failed to read value
                 Log.w(TAG, "Failed to read value.", databaseError.toException());
             }
+
+
         });
 
+
+        System.out.println("############# " + restaranteList.size());
         return restaranteList;
     }
 
@@ -193,6 +215,8 @@ public class DatabaseAccess {
     public void handlLeituraRestaurante( StructRestaurante tmp ){
         // Adiciona elementos a um vetor
         restaranteList.add(tmp.getDados().getNome());
+
+        InitActivity.atualizaLista();
     }
 
 
