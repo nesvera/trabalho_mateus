@@ -14,6 +14,8 @@ import android.widget.Toast;
 import com.example.nesvera.apprestaurante.Firebase.DadosCategoria;
 import com.example.nesvera.apprestaurante.Firebase.DadosItem;
 import com.example.nesvera.apprestaurante.Firebase.DatabaseAccess;
+import com.example.nesvera.apprestaurante.Structs.StructDados;
+import com.example.nesvera.apprestaurante.Structs.StructRestaurante;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -45,6 +47,23 @@ public class InitActivity extends AppCompatActivity {
 
         //database.getReference("vaisefude").child("aparece");
 
+        DatabaseReference teste2 = database.getReference();
+
+        StructRestaurante a = new StructRestaurante();
+        StructDados b = new StructDados();
+
+        b.setNome("padaria_edson");
+        b.setDescricao("faz pao");
+
+        a.setDados(b);
+
+        DatabaseReference teste3 = teste2.child(b.getNome());
+        teste3.setValue(a);
+
+        List<String> listStr = dbRestaurante.getRestauranteList();
+
+
+        /*
         dbRestaurante.addRestaurante("testando_som");
         dbRestaurante.setRestaurante("testando_som");
 
@@ -61,6 +80,8 @@ public class InitActivity extends AppCompatActivity {
         novaCategoria.setNome("Macarrão");
         dbRestaurante.addCategoria(novaCategoria);
 
+*/
+
 
 
         final Activity activity = this;
@@ -68,8 +89,8 @@ public class InitActivity extends AppCompatActivity {
         String [] games = {"COD", "GTA", "BF", "Need","TLOU", "ASSANIS", "ROCKET LEAGUE", "VSF", "A", "B", "C"};
 
         ListView mainListView = (ListView)findViewById(R.id.listViewInit);
-        //ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, tmp);
-        //mainListView.setAdapter(adapter);
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, listStr);
+        mainListView.setAdapter(adapter);
 
         btn_scan = (Button)findViewById(R.id.b_scan);
         btn_scan.setOnClickListener(new View.OnClickListener(){

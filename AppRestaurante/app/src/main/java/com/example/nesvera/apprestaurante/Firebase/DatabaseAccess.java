@@ -2,6 +2,7 @@ package com.example.nesvera.apprestaurante.Firebase;
 
 import android.util.Log;
 
+import com.example.nesvera.apprestaurante.Structs.StructRestaurante;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -147,6 +148,8 @@ public class DatabaseAccess {
         categoriaListStr = null;
         categoriaListStr = new ArrayList<String>();
 
+        restaranteList.clear();
+
         // Seta a referencia dentro da "pasta" Cardapio
         final DatabaseReference cardapio = firebaseDatabase.getReference();
 
@@ -158,12 +161,12 @@ public class DatabaseAccess {
                 for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
 
                     // Le posicao da lista que veio do firebase
-                    String temp = postSnapshot.getValue(String.class);
+                    StructRestaurante temp = postSnapshot.getValue(StructRestaurante.class);
 
                     if (temp != null) {
-                        //handlLeituraRestaurante(temp);
+                        handlLeituraRestaurante(temp);
 
-                        //System.out.println("############# " + temp.getNome());
+                        System.out.println("############# " + temp.getDados().getNome());
 
                     } else {
                         System.out.println("Algo aconteceu");
@@ -178,7 +181,7 @@ public class DatabaseAccess {
             }
         });
 
-        return categoriaListStr;
+        return restaranteList;
     }
 
     public void handlLeituraCategoria( DadosCategoria tmp ){
@@ -187,9 +190,9 @@ public class DatabaseAccess {
         categoriaListStr.add(tmp.getNome());
     }
 
-    public void handlLeituraRestaurante( String tmp ){
+    public void handlLeituraRestaurante( StructRestaurante tmp ){
         // Adiciona elementos a um vetor
-        restaranteList.add(tmp);
+        restaranteList.add(tmp.getDados().getNome());
     }
 
 
