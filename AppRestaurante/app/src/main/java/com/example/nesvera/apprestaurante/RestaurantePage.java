@@ -8,8 +8,13 @@ import android.support.v7.widget.Toolbar;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.example.nesvera.apprestaurante.Firebase.DatabaseAccess;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class RestaurantePage extends AppCompatActivity {
 
@@ -38,6 +43,15 @@ public class RestaurantePage extends AppCompatActivity {
 
         tabLayout = (TabLayout)findViewById(R.id.tab_layout);
         tabLayout.setupWithViewPager(viewPager);
+
+        FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseAccess dbRestaurante = new DatabaseAccess(database);
+
+        dbRestaurante.setRestaurante("testando_som");
+
+        List<String> tmp = new ArrayList<String>();
+        tmp = dbRestaurante.getCategoriaListStr();
 
 
 

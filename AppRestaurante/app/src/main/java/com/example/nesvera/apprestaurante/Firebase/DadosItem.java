@@ -1,23 +1,16 @@
-package com.example.nesvera.apprestaurante.Database;
-
-import com.example.nesvera.apprestaurante.Database.DadosItem;
-
-import java.util.ArrayList;
-import java.util.List;
+package com.example.nesvera.apprestaurante.Firebase;
 
 /**
- * Created by Nesvera on 05/12/2016.
+ * Created by Nesvera on 07/12/2016.
  */
 
-public class DadosRestaurante {
+public class DadosItem {
 
     private String nome;
     private String descricao;
+    private double valor;
 
-
-    public DadosRestaurante() {
-        nome = new String();
-        descricao = new String();
+    public DadosItem() {
     }
 
     public String getNome() {
@@ -36,4 +29,11 @@ public class DadosRestaurante {
         this.descricao = descricao;
     }
 
+    public double getValor() {
+        return valor;
+    }
+
+    public void setValor(double valor) {
+        this.valor = valor;
+    }
 }

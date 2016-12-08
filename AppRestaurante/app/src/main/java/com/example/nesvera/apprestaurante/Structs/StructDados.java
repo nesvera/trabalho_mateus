@@ -1,13 +1,17 @@
-package com.example.nesvera.apprestaurante.Database;
+package com.example.nesvera.apprestaurante.Structs;
 
 /**
- * Created by Nesvera on 05/12/2016.
+ * Created by Nesvera on 08/12/2016.
  */
 
-public class DadosItem {
+public class StructDados {
+
     private String nome;
     private String descricao;
-    private Float valor;
+    private String endereco;
+
+    public StructDados() {
+    }
 
     public String getNome() {
         return nome;
@@ -25,11 +29,11 @@ public class DadosItem {
         this.descricao = descricao;
     }
 
-    public Float getValor() {
-        return valor;
+    public String getEndereco() {
+        return endereco;
     }
 
-    public void setValor(Float valor) {
-        this.valor = valor;
+    public void setEndereco(String endereco) {
+        this.endereco = endereco;
     }
 }

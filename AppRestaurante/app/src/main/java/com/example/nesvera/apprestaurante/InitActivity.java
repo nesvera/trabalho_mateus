@@ -6,45 +6,174 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ListView;
 import android.widget.Toast;
 
-import com.example.nesvera.apprestaurante.Database.CardapioRestaurante;
-import com.example.nesvera.apprestaurante.Database.DadosCategoria;
-import com.example.nesvera.apprestaurante.Database.DadosItem;
-import com.example.nesvera.apprestaurante.Database.DadosRestaurante;
-import com.example.nesvera.apprestaurante.Database.DatabaseRestaurante;
+import com.example.nesvera.apprestaurante.Firebase.DadosCategoria;
+import com.example.nesvera.apprestaurante.Firebase.DadosItem;
+import com.example.nesvera.apprestaurante.Firebase.DatabaseAccess;
+import com.example.nesvera.apprestaurante.Structs.StructDados;
+import com.example.nesvera.apprestaurante.Structs.StructRestaurante;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import static android.content.ContentValues.TAG;
+
 public class InitActivity extends AppCompatActivity {
     private Button btn_scan;
-
-    public static DatabaseRestaurante teste2;
+    private DatabaseAccess dbRestaurante;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_init);
 
+        // apagar
+        FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+
+        dbRestaurante = new DatabaseAccess(database);
+
+        //database.getReference("vaisefude").child("aparece");
+
+        DatabaseReference teste2 = database.getReference();
+
+        StructRestaurante a = new StructRestaurante();
+        StructDados b = new StructDados();
+
+        b.setNome("padaria_edson");
+        b.setDescricao("faz pao");
+
+        a.setDados(b);
+
+        DatabaseReference teste3 = teste2.child(b.getNome());
+        teste3.setValue(a);
+
+        List<String> listStr = dbRestaurante.getRestauranteList();
 
 
-            // apagar
-            FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
-            FirebaseDatabase database = FirebaseDatabase.getInstance();
-            DatabaseReference myRef = database.getReference("Cardappio").child("Restaurantes").child("RestauranteZ");
+        /*
+        dbRestaurante.addRestaurante("testando_som");
+        dbRestaurante.setRestaurante("testando_som");
 
-        //
+        DadosCategoria novaCategoria = new DadosCategoria();
+        novaCategoria.setNome("Xis");
+        dbRestaurante.addCategoria(novaCategoria);
+
+        novaCategoria.setNome("Cachorro Quente");
+        dbRestaurante.addCategoria(novaCategoria);
+
+        novaCategoria.setNome("Bebidas");
+        dbRestaurante.addCategoria(novaCategoria);
+
+        novaCategoria.setNome("Macarrão");
+        dbRestaurante.addCategoria(novaCategoria);
+
+*/
 
 
-            // Cria campo dados
 
+        final Activity activity = this;
+
+        String [] games = {"COD", "GTA", "BF", "Need","TLOU", "ASSANIS", "ROCKET LEAGUE", "VSF", "A", "B", "C"};
+
+        ListView mainListView = (ListView)findViewById(R.id.listViewInit);
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, listStr);
+        mainListView.setAdapter(adapter);
+
+        btn_scan = (Button)findViewById(R.id.b_scan);
+        btn_scan.setOnClickListener(new View.OnClickListener(){
+            public void onClick(View view){
+               /*
+                IntentIntegrator integrator = new IntentIntegrator(activity);
+                integrator.setDesiredBarcodeFormats(IntentIntegrator.QR_CODE_TYPES);
+                integrator.setOrientationLocked(true);
+                integrator.setPrompt("Leia o QR Code");
+                integrator.setCameraId(0);
+                integrator.setBeepEnabled(false);
+                integrator.setBarcodeImageEnabled(false);
+                integrator.setCaptureActivity(CaptureActivityPortrait.class);
+                integrator.initiateScan();
+                */
+
+                Intent intent = new Intent(InitActivity.this, RestaurantePage.class);
+                startActivity(intent);
+            }
+        });
+
+    }
+
+    protected void onActivityResult( int requestCode, int resultCode, Intent data ){
+        IntentResult result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data );
+
+        if( result != null ){
+            if( result.getContents() == null ){
+                Toast.makeText(this, "You cancelled the scanning", Toast.LENGTH_LONG).show();
+
+            }else{
+                Toast.makeText(this, result.getContents(), Toast.LENGTH_LONG).show();
+
+                Intent intent = new Intent(InitActivity.this, RestaurantePage.class);
+                startActivity(intent);
+        }
+
+        }else{
+            super.onActivityResult(requestCode, resultCode, data);
+        }
+    }
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        /*
+        DadosItem produto = new DadosItem();
+        produto.setNome("Cachorro quente sem salsicha");
+        produto.setDescricao("O nome ja explica");
+        produto.setValor(15.5);
+
+        dbRestaurante.addItem("Hot Dog", produto);
+
+        produto.setNome("Cachorro quente com salsicha");
+        produto.setDescricao("De vez acaba");
+        produto.setValor(10.5);
+
+        dbRestaurante.addItem("Hot Dog", produto);
+        */
+
+//dbRestaurante.getCategoriaList();
+
+//
+
+
+// Cria campo dados
+/*
             DadosRestaurante teste = new DadosRestaurante();
             teste.setNome("Zé lanches");
             teste.setDescricao("Desde de 1999, seu Zé fazendo lanches com ousadia!");
@@ -110,46 +239,4 @@ public class InitActivity extends AppCompatActivity {
                // myRef.setValue(teste);
             } catch (Exception e) {
             }
-
-        // apagar
-
-        btn_scan = (Button)findViewById(R.id.b_scan);
-
-        final Activity activity = this;
-
-        btn_scan.setOnClickListener(new View.OnClickListener(){
-            public void onClick(View view){
-                IntentIntegrator integrator = new IntentIntegrator(activity);
-                integrator.setDesiredBarcodeFormats(IntentIntegrator.QR_CODE_TYPES);
-                integrator.setOrientationLocked(true);
-                integrator.setPrompt("Leia o QR Code");
-                integrator.setCameraId(0);
-                integrator.setBeepEnabled(false);
-                integrator.setBarcodeImageEnabled(false);
-                integrator.setCaptureActivity(CaptureActivityPortrait.class);
-                integrator.initiateScan();
-            }
-        });
-
-    }
-
-    protected void onActivityResult( int requestCode, int resultCode, Intent data ){
-        IntentResult result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data );
-
-        if( result != null ){
-            if( result.getContents() == null ){
-                Toast.makeText(this, "You cancelled the scanning", Toast.LENGTH_LONG).show();
-
-            }else{
-                Toast.makeText(this, result.getContents(), Toast.LENGTH_LONG).show();
-
-                Intent intent = new Intent(InitActivity.this, RestaurantePage.class);
-                startActivity(intent);
-            }
-
-        }else{
-            super.onActivityResult(requestCode, resultCode, data);
-        }
-    }
-
-}
+*/
