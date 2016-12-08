@@ -13,6 +13,7 @@ import android.widget.Toast;
 
 import com.example.nesvera.apprestaurante.Firebase.DadosCategoria;
 import com.example.nesvera.apprestaurante.Firebase.DadosItem;
+import com.example.nesvera.apprestaurante.Firebase.DadosRestaurante;
 import com.example.nesvera.apprestaurante.Firebase.DatabaseAccess;
 import com.example.nesvera.apprestaurante.Structs.StructDados;
 import com.example.nesvera.apprestaurante.Structs.StructRestaurante;
@@ -34,6 +35,9 @@ public class InitActivity extends AppCompatActivity {
     private Button btn_scan;
     private DatabaseAccess dbRestaurante;
 
+    private static ListView mainListView;
+    private static ArrayAdapter<String> adapter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,20 +49,9 @@ public class InitActivity extends AppCompatActivity {
 
         dbRestaurante = new DatabaseAccess(database);
 
-        //database.getReference("vaisefude").child("aparece");
-
-        DatabaseReference teste2 = database.getReference();
-
-        StructRestaurante a = new StructRestaurante();
-        StructDados b = new StructDados();
-
-        b.setNome("padaria_edson");
-        b.setDescricao("faz pao");
-
-        a.setDados(b);
-
-        DatabaseReference teste3 = teste2.child(b.getNome());
-        teste3.setValue(a);
+        dbRestaurante.addRestaurante("trago_trago_bebidas","entrega tragos","rua do ceu");
+        dbRestaurante.addRestaurante("pastelaria_ruan","faz pastel","rua do ceu");
+        dbRestaurante.addRestaurante("bar_do_christman","vende droga","nao é fixo");
 
         List<String> listStr = dbRestaurante.getRestauranteList();
 
@@ -86,10 +79,9 @@ public class InitActivity extends AppCompatActivity {
 
         final Activity activity = this;
 
-        String [] games = {"COD", "GTA", "BF", "Need","TLOU", "ASSANIS", "ROCKET LEAGUE", "VSF", "A", "B", "C"};
+        mainListView = (ListView)findViewById(R.id.listViewInit);
+        adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, DatabaseAccess.restaranteList);
 
-        ListView mainListView = (ListView)findViewById(R.id.listViewInit);
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, listStr);
         mainListView.setAdapter(adapter);
 
         btn_scan = (Button)findViewById(R.id.b_scan);
@@ -107,8 +99,8 @@ public class InitActivity extends AppCompatActivity {
                 integrator.initiateScan();
                 */
 
-                Intent intent = new Intent(InitActivity.this, RestaurantePage.class);
-                startActivity(intent);
+                //Intent intent = new Intent(InitActivity.this, RestaurantePage.class);
+                //startActivity(intent);
             }
         });
 
@@ -131,6 +123,10 @@ public class InitActivity extends AppCompatActivity {
         }else{
             super.onActivityResult(requestCode, resultCode, data);
         }
+    }
+
+    public static void atualizaLista(){
+        mainListView.setAdapter(adapter);
     }
 
 }
