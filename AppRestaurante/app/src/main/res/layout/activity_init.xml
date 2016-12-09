@@ -10,12 +10,28 @@
 
     <include
         layout="@layout/toolbar_restaurante"
-        android:layout_width="360dp"
+        android:layout_width="0dp"
         android:layout_height="56dp"
         android:id="@+id/app_Bar"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
-        tools:layout_editor_absoluteY="0dp" />
+        tools:layout_constraintTop_creator="1"
+        tools:layout_constraintRight_creator="1"
+        tools:layout_constraintLeft_creator="1"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <include
+        layout="@layout/toolbar_restaurante"
+        android:layout_width="0dp"
+        android:layout_height="56dp"
+        android:id="@+id/app_Bar2"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        tools:layout_constraintRight_creator="1"
+        tools:layout_constraintLeft_creator="1"
+        app:layout_constraintTop_toTopOf="@+id/app_Bar"
+        android:layout_marginTop="48dp" />
 
     <Button
         android:text="QR CODE"
@@ -26,8 +42,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         android:layout_marginBottom="16dp"
         app:layout_constraintLeft_toLeftOf="parent"
-        android:layout_marginTop="8dp"
-        app:layout_constraintTop_toBottomOf="@+id/listView"
         tools:layout_constraintRight_creator="1"
         tools:layout_constraintLeft_creator="1" />
 
@@ -40,26 +54,27 @@
         app:layout_constraintLeft_toLeftOf="parent"
         android:textAllCaps="true"
         android:textColor="@android:color/black"
-        app:layout_constraintBottom_toTopOf="@+id/listView"
-        android:layout_marginBottom="8dp"
         tools:layout_constraintRight_creator="1"
         tools:layout_constraintLeft_creator="1"
-        android:layout_marginTop="8dp"
-        app:layout_constraintTop_toBottomOf="@+id/app_Bar" />
+        app:layout_constraintTop_toTopOf="@+id/app_Bar2"
+        app:layout_constraintBottom_toTopOf="@+id/listViewInit"
+        android:layout_marginBottom="8dp"
+        android:textSize="18sp" />
 
     <ListView
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginEnd="16dp"
         app:layout_constraintRight_toRightOf="parent"
         android:layout_marginStart="16dp"
         app:layout_constraintLeft_toLeftOf="parent"
-        android:layout_marginTop="104dp"
+        android:layout_marginTop="120dp"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         android:layout_marginBottom="104dp"
         android:id="@+id/listViewInit"
         tools:layout_constraintTop_creator="1"
-        tools:layout_constraintBottom_creator="1" />
+        tools:layout_constraintBottom_creator="1"
+        app:layout_constraintVertical_bias="0.51" />
 
 </android.support.constraint.ConstraintLayout>

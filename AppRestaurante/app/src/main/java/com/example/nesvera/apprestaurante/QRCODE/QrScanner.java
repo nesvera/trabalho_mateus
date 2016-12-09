@@ -1,4 +1,4 @@
-package com.example.nesvera.apprestaurante;
+package com.example.nesvera.apprestaurante.QRCODE;
 
 import android.support.v7.app.AppCompatActivity;
 

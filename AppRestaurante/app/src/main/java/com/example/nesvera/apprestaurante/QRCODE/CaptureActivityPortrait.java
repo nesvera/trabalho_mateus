@@ -1,4 +1,4 @@
-package com.example.nesvera.apprestaurante;
+package com.example.nesvera.apprestaurante.QRCODE;
 
 // Acitivity utilizada para fixar o leitor QR na posição vertical
 

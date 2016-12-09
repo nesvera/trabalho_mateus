@@ -1,7 +1,6 @@
 package com.example.nesvera.apprestaurante.Structs;
 
-import com.example.nesvera.apprestaurante.Firebase.DadosCategoria;
-
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -14,6 +13,7 @@ public class StructCategoria {
     private List<StructItem> items;
 
     public StructCategoria() {
+        items = new ArrayList<StructItem>();
     }
 
     public String getNome() {
@@ -26,6 +26,10 @@ public class StructCategoria {
 
     public List<StructItem> getItems() {
         return items;
+    }
+
+    public void addItem(StructItem item){
+        items.add(item);
     }
 
     public void setItems(List<StructItem> items) {

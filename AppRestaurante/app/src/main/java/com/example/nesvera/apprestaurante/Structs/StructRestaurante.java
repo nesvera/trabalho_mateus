@@ -1,5 +1,6 @@
 package com.example.nesvera.apprestaurante.Structs;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -13,6 +14,7 @@ public class StructRestaurante {
     private StructDados dados;
 
     public StructRestaurante() {
+        cardapio = new ArrayList<StructCategoria>();
     }
 
     public List<StructCategoria> getCardapio() {
@@ -21,6 +23,10 @@ public class StructRestaurante {
 
     public void setCardapio(List<StructCategoria> cardapio) {
         this.cardapio = cardapio;
+    }
+
+    public void addCategoria(StructCategoria newCat){
+        cardapio.add(newCat);
     }
 
     public String getPedidos() {
@@ -38,4 +44,6 @@ public class StructRestaurante {
     public void setDados(StructDados dados) {
         this.dados = dados;
     }
+
+
 }
