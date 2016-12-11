@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <TextView
+        android:text="TextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/textViewValor"
+        android:layout_alignBaseline="@+id/textView4"
+        android:layout_alignBottom="@+id/textView4"
+        android:layout_alignParentEnd="true"
+        app:layout_constraintTop_toTopOf="@+id/textView6"
+        app:layout_constraintLeft_toLeftOf="@+id/textViewProduto" />
+
+    <TextView
+        android:text="Produto: "
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView4"
+        android:layout_alignParentTop="true"
+        android:layout_toStartOf="@+id/textViewValor"
+        android:layout_marginStart="48dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginTop="32dp"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:text="Valor: "
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView6"
+        android:layout_below="@+id/textView4"
+        android:layout_alignStart="@+id/textView4"
+        android:layout_marginEnd="16dp"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toLeftOf="@+id/textView4"
+        app:layout_constraintHorizontal_bias="0.0"
+        android:layout_marginTop="16dp"
+        app:layout_constraintTop_toBottomOf="@+id/textView4" />
+
+    <TextView
+        android:text="TextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/textViewProduto"
+        android:layout_alignBaseline="@+id/textView6"
+        android:layout_alignBottom="@+id/textView6"
+        android:layout_alignStart="@+id/textViewValor"
+        android:layout_marginEnd="16dp"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/textView4"
+        android:layout_marginStart="8dp"
+        app:layout_constraintLeft_toRightOf="@+id/textView4" />
+
+    <Button
+        android:text="Cancelar"
+        android:id="@+id/bt_cancelar"
+        android:layout_width="100dp"
+        android:layout_height="48dp"
+        android:layout_below="@+id/textView6"
+        android:layout_toStartOf="@+id/textViewProduto"
+        android:layout_marginStart="16dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginEnd="16dp"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintHorizontal_bias="0.13"
+        android:layout_marginTop="104dp"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginBottom="100dp" />
+
+    <Button
+        android:text="Pedir"
+        android:layout_width="100dp"
+        android:id="@+id/bt_pedir"
+        android:layout_height="48dp"
+        android:layout_alignBaseline="@+id/bt_cancelar"
+        android:layout_alignBottom="@+id/bt_cancelar"
+        android:layout_alignStart="@+id/textViewProduto"
+        android:layout_marginEnd="16dp"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/bt_cancelar"
+        android:layout_marginStart="8dp"
+        app:layout_constraintLeft_toRightOf="@+id/bt_cancelar" />
+
+
+
+</android.support.constraint.ConstraintLayout>

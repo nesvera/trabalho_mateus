@@ -112,7 +112,93 @@ public class DatabaseAccess {
         listener.onStart();
 
         // Seta a referencia dentro da "pasta" Cardapio
-        final DatabaseReference cardapio = restauranteRef.child("Cardapio/");
+        final DatabaseReference cardapio = restauranteRef.child("Cardapio");
+
+        // Le todas categorias de produtos dentro dessa pasta
+        cardapio.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+
+                listener.OnSuccess(dataSnapshot);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                // Failed to read value
+
+                listener.onFailed(databaseError);
+            }
+        });
+    }
+
+    /** Retorn a lista de itens dentro de uma categoria **/
+    public void getItems( String categoria, final OnGetDataListener listener ){
+        // Metodo utiliza a interface OnGetDataListener para retornar os valores e resolver a race condition
+        listener.onStart();
+
+        // Seta a referencia dentro da "pasta" do item, dentro da pasta cardapio
+        final DatabaseReference cardapio = restauranteRef.child("Cardapio").child(categoria);
+
+        // Le todas categorias de produtos dentro dessa pasta
+        cardapio.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+
+                listener.OnSuccess(dataSnapshot);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                // Failed to read value
+
+                listener.onFailed(databaseError);
+            }
+        });
+    }
+
+
+    /** Retorna os dados do restaurante **/
+    public void getDados(final OnGetDataListener listener ){
+        // Metodo utiliza a interface OnGetDataListener para retornar os valores e resolver a race condition
+        listener.onStart();
+
+        // Seta a referencia dentro da "pasta" do item, dentro da pasta cardapio
+        final DatabaseReference cardapio = restauranteRef.child("dados");
+
+        // Le todas categorias de produtos dentro dessa pasta
+        cardapio.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+
+                listener.OnSuccess(dataSnapshot);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                // Failed to read value
+
+                listener.onFailed(databaseError);
+            }
+        });
+    }
+
+    /** Adiciona pedido do usuario ao banco de dados */
+    public void addPedido(StructPedido pedido ){
+
+        restauranteRef.child("Pedidos").push().setValue(pedido);
+
+    }
+
+    /** Obtem a lista de pedidos do banco de dados
+     *
+     * Quando chamar esse metodo utilizar o exemplo no final desse arquivo
+     * **/
+    public void getPedidos(final OnGetDataListener listener ){
+        // Metodo utiliza a interface OnGetDataListener para retornar os valores e resolver a race condition
+        listener.onStart();
+
+        // Seta a referencia dentro da "pasta" do pedidos
+        final DatabaseReference cardapio = restauranteRef.child("Pedidos");
 
         // Le todas categorias de produtos dentro dessa pasta
         cardapio.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -133,10 +219,6 @@ public class DatabaseAccess {
 
 
 
-
-
-
-
     public DatabaseReference getRestauranteRef() {
         return restauranteRef;
     }
@@ -151,14 +233,9 @@ public class DatabaseAccess {
         this.restauranteRef = restauranteRef;
     }
 
-    public void addPedido(StructPedido pedido ){
-        restauranteRef.child("Pedidos").push().setValue(pedido);
 
-    }
 
-    public void getPedidoList(){
 
-    }
 
     public List<StructPedido> getPedidos(){
 
@@ -198,78 +275,48 @@ public class DatabaseAccess {
         });
     }
 
-    /*
-    public void setupDBListener(){
-        // Read from the database
-        //myRef = database.getReference("enemies/");
-        //myRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                //Log.e("Count " , ""+dataSnapshot.getChildrenCount());
-                for(DataSnapshot postSnapshot: dataSnapshot.getChildren()) {
-                    Enemy enemy = postSnapshot.getValue(Enemy.class);
-                    if (enemy != null){
-                        System.out.println("############# " + enemy.getName());
-                        LatLng latLng = new LatLng(enemy.getLat(), enemy.getLng());
-
-                        handleNewEnemy(latLng, enemy.getName());
-                    }
-                }
-            }
-
-            @Override
-            public void onCancelled(DatabaseError error) {
-
-            }
-        });
-    }
-    */
-
-/*
-
-
-    public List<String> getCategoriaListStr(){
-
-        // Limpa as listas auxiliares globais
-        categoriaList = null;
-        categoriaList = new ArrayList<StructCategoria>();
-
-        categoriaListStr = null;
-        categoriaListStr = new ArrayList<String>();
-
-        // Seta a referencia dentro da "pasta" Cardapio
-        final DatabaseReference cardapio = restauranteRef.child("Cardapio/");
-
-        // Le todas categorias de produtos dentro dessa pasta
-        cardapio.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-
-                for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
-
-                    // Le posicao da lista que veio do firebase
-                    StructCategoria temp = postSnapshot.getValue(StructCategoria.class);
-
-                    if (temp != null) {
-                        handlLeituraCategoria(temp);
-
-                    } else {
-                        System.out.println("Algo aconteceu");
-                    }
-                }
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-                // Failed to read value
-                Log.w(TAG, "Failed to read value.", databaseError.toException());
-            }
-        });
-
-        return categoriaListStr;
-    }
-
-
- */
 
 }
+
+
+
+
+/* Exemplo de como chamar os metodos que retornam dados do banco de dados
+
+ dbRestaurante.getPedidos( new OnGetDataListener() {
+                @Override
+                public void onStart() {
+                    // Do some thing when start get data here
+                }
+
+                @Override
+                public void OnSuccess(DataSnapshot dataSnapshot1) {
+
+                    for (DataSnapshot postSnapshot : dataSnapshot1.getChildren()) {
+
+                        // Le posicao da lista que veio do firebase
+                        try{
+                            StructPedido temp1 = postSnapshot.getValue(StructPedido.class);
+
+                            if (temp1 != null) {
+
+                                // utiliza a variavel temp1 aqui dentro
+
+                            } else {
+                                System.out.println("Algo aconteceu");
+                            }
+
+                        }catch (Exception e){
+                            // DO something
+                        }
+
+                    }
+                }
+
+                @Override
+                public void onFailed(DatabaseError databaseError) {
+                    //DO SOME THING WHEN GET DATA FAILED HERE
+                    Log.e(TAG, "Failed to read value.", databaseError.toException());
+                }
+            });
+ */

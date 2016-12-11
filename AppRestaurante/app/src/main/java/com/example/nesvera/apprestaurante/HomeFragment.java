@@ -6,10 +6,13 @@ package com.example.nesvera.apprestaurante;
         import android.view.LayoutInflater;
         import android.view.View;
         import android.view.ViewGroup;
+        import android.widget.TextView;
 
         import com.example.nesvera.apprestaurante.Firebase.DatabaseAccess;
+        import com.example.nesvera.apprestaurante.Structs.StructDados;
         import com.google.firebase.auth.FirebaseAuth;
-        import com.google.firebase.database.FirebaseDatabase;
+
+        import org.w3c.dom.Text;
 
         import java.util.ArrayList;
         import java.util.List;
@@ -26,6 +29,19 @@ public class HomeFragment extends android.support.v4.app.Fragment {
         return inflater.inflate(R.layout.fragment_home,container,false);
 
 
+
+    }
+
+    public void alteraDados(StructDados structDados){
+
+        TextView tvNome = (TextView)getActivity().findViewById(R.id.textViewNome);
+        tvNome.setText(structDados.getNome());
+
+        TextView tvDescricao = (TextView)getActivity().findViewById(R.id.textViewDescricao);
+        tvDescricao.setText(structDados.getDescricao());
+
+        TextView tvEndereco = (TextView)getActivity().findViewById(R.id.textViewEndereco);
+        tvEndereco.setText(structDados.getEndereco());
 
     }
 }

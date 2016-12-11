@@ -129,7 +129,6 @@ public class InitActivity extends AppCompatActivity {
             }
         });
 
-
         // Pronto até aqui (falta implementar o click na lista)
     }
 
@@ -154,152 +153,9 @@ public class InitActivity extends AppCompatActivity {
 
 }
 
-
-
-
-/*
-
-        dbRestaurante.addRestaurante("trago_trago_bebidas","entrega tragos","rua do ceu");
-        dbRestaurante.setRestaurante("trago_trago_bebidas");
-
-        StructItem newItem = new StructItem();
-
-        StructCategoria newCat = new StructCategoria();
-
-        newCat.setNome("Vodca");
-        dbRestaurante.addCategoria(newCat);
-
-        newItem.setNome("Rajska");
-        newItem.setDescricao("forte");
-        newItem.setValor(15.5);
-        dbRestaurante.addItem("Vodca",newItem);
-
-        newItem.setNome("Smirnoff");
-        newItem.setDescricao("Topper");
-        newItem.setValor(30.9);
-        dbRestaurante.addItem("Vodca",newItem);
-
-        newItem.setNome("Sky");
-        newItem.setDescricao("rei do camarote");
-        newItem.setValor(45.0);
-        dbRestaurante.addItem("Vodca",newItem);
-
-        newCat.setNome("Cerveja");
-        dbRestaurante.addCategoria(newCat);
-
-        newItem.setNome("Brahma");
-        newItem.setDescricao("Não gosto");
-        newItem.setValor(3.5);
-        dbRestaurante.addItem("Cerveja",newItem);
-
-        newItem.setNome("Stella");
-        newItem.setDescricao("Gosto");
-        newItem.setValor(4.0);
-        dbRestaurante.addItem("Cerveja",newItem);
-
-        newItem.setNome("Polar");
-        newItem.setDescricao("Tomo que nem loco");
-        newItem.setValor(4.0);
-        dbRestaurante.addItem("Cerveja",newItem);
-
-
-        dbRestaurante.addRestaurante("pastelaria_ruan","faz pastel","rua do ceu");
-        dbRestaurante.addRestaurante("bar_do_christman","vende droga","nao é fixo");
-
-
-
- */
-
-
-
-
-
-
-        /*
-        DadosItem produto = new DadosItem();
-        produto.setNome("Cachorro quente sem salsicha");
-        produto.setDescricao("O nome ja explica");
-        produto.setValor(15.5);
-
-        dbRestaurante.addItem("Hot Dog", produto);
-
-        produto.setNome("Cachorro quente com salsicha");
-        produto.setDescricao("De vez acaba");
-        produto.setValor(10.5);
-
-        dbRestaurante.addItem("Hot Dog", produto);
-        */
-
-//dbRestaurante.getCategoriaList();
-
-//
-
-
-// Cria campo dados
-/*
-            DadosRestaurante teste = new DadosRestaurante();
-            teste.setNome("Zé lanches");
-            teste.setDescricao("Desde de 1999, seu Zé fazendo lanches com ousadia!");
-
-            DadosCategoria xisCat = new DadosCategoria();
-            List<DadosItem> xisList = new ArrayList<DadosItem>();
-            DatabaseRestaurante databaseRestaurante = new DatabaseRestaurante();
-
-            DadosItem xis1 = new DadosItem();
-            xis1.setNome("Xis avc");
-            xis1.setDescricao("Matando não só a fome!");
-            xis1.setValor((float) 12.5);
-            xisList.add(xis1);
-
-            DadosItem xis2 = new DadosItem();
-            xis2.setNome("Xis bacon");
-            xis2.setDescricao("Bacon é bom");
-            xis2.setValor((float) 13.7);
-            xisList.add(xis2);
-
-            DadosItem xis3 = new DadosItem();
-            xis3.setNome("Xis sem nome");
-            xis3.setDescricao("Acabou a criatividade");
-            xis3.setValor((float) 10.0);
-            xisList.add(xis3);
-
-            DadosItem xis4 = new DadosItem();
-            xis4.setNome("X9");
-            xis4.setDescricao("Dedurando sua fome!");
-            xis4.setValor((float)3.6);
-            xisList.add(xis4);
-
-            xisCat.setNome("Xis");
-            xisCat.setProduto(xisList);
-
-            databaseRestaurante.addCardapio(xisCat);
-
-            DadosCategoria hotdogCat = new DadosCategoria();
-            List<DadosItem> hotdogList = new ArrayList<DadosItem>();
-
-            DadosItem hotdog1 = new DadosItem();
-            hotdog1.setNome("Sem salsicha");
-            hotdog1.setDescricao("Nome ja diz tudo");
-            hotdog1.setValor((float) 5.5);
-            hotdogList.add(hotdog1);
-
-            DadosItem hotdog2 = new DadosItem();
-            hotdog2.setNome("Com salsicha");
-            hotdog2.setDescricao("Normal");
-            hotdog2.setValor((float) 7.5);
-            hotdogList.add(hotdog2);
-
-            hotdogCat.setNome("Hotdog");
-            hotdogCat.setProduto(hotdogList);
-
-            databaseRestaurante.addCardapio(hotdogCat);
-
-            myRef.setValue(databaseRestaurante);
-
-            teste2 = databaseRestaurante;
-
-            try {
-               // myRef.setValue(teste);
-            } catch (Exception e) {
-            }
-*/
+/** O que falta
+ *                  Obter o nome do restaurante e mesa e declarar no SimpleFragmentPageAdapter via QR
+ *                  Fazer o dialog para pagina inical que mostra os dados do restaurante
+ *
+ *
+ * **/

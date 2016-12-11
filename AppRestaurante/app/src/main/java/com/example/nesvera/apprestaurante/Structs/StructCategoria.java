@@ -13,7 +13,6 @@ public class StructCategoria {
     private List<StructItem> items;
 
     public StructCategoria() {
-        items = new ArrayList<StructItem>();
     }
 
     public String getNome() {
@@ -26,6 +25,10 @@ public class StructCategoria {
 
     public List<StructItem> getItems() {
         return items;
+    }
+
+    public int  getListSize(){
+        return items.size();
     }
 
     public void addItem(StructItem item){
